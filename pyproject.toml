@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "pdf_parser"
+version = "0.1.0"
+description = "A simple library wrapper over pdfplumber that parses PDF content to a text file."
+authors = ["inchirahjabir <inchirahj@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+pdfplumber = "^0.11.0"
+pytest = "^8.2.0"
+mkdocs = "^1.6.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

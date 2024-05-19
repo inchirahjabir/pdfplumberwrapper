@@ -1,0 +1,18 @@
+site_name: PDFPlumberWrapper Documentation
+site_description: Documentation for PDFPlumberWrapper, a simple library wrapper over pdfplumber that parses PDF content to a text file.
+site_author: Inchirah Jabir
+repo_name: inchirahjabir/pdfplumberwrapper
+repo_url: https://github.com/inchirahjabir/pdfplumberwrapper
+theme:
+  name: mkdocs
+  palette:
+    primary: 'blue'
+    accent: 'blue'
+
+nav:
+  - Home: index.md
+  - Installation: installation.md
+  - Getting Started: getting_started.md
+  - CLI Guide: cli_guide.md
+  - API Reference: api_reference.md
+  - Contributing: contributing.md
