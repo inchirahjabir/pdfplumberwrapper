@@ -1,6 +1,13 @@
-import pdfplumber
-from typing import Union, List
+"""
+PDFParser Module
+
+This module provides a simple library wrapper over pdfplumber to parse PDF content
+and write it to a text file.
+"""
+
 from pathlib import Path
+from typing import Union, Optional
+import pdfplumber
 
 
 class PDFParser:
@@ -14,20 +21,24 @@ class PDFParser:
 
         Args:
             pdf_path (Union[str, Path]): The path to the PDF file to be parsed.
+
+        Raises:
+            ValueError: If the file extension is not '.pdf'.
         """
         self.pdf_path = Path(pdf_path)
+        if self.pdf_path.suffix.lower() != ".pdf":
+            raise ValueError("The file provided is not a PDF.")
 
-    def parse_to_file(self, parsed_file_path: Union[str, Path] = None) -> Union[str, Path]:
+    def parse_to_file(
+        self, parsed_file_path: Optional[Union[str, Path]] = None
+    ) -> None:
         """
         Parses the PDF content and writes it to a text file.
 
         Args:
-            parsed_file_path (Union[str, Path], optional): Path to the parsed text file.
+            parsed_file_path (Optional[Union[str, Path]]): Path to the parsed text file.
                 Defaults to None, in which case the parsed file will have the same
                 name as the PDF file with "_core_parsed.txt" appended.
-
-        Returns:
-            Union[str, Path]: The path to the parsed text file.
 
         Raises:
             FileNotFoundError: If the PDF file is not found.
@@ -40,13 +51,13 @@ class PDFParser:
 
             # If no parsed path is given, create a default parsed file path
             if not parsed_file_path:
-                parsed_file_path = self.pdf_path.with_name(f"{self.pdf_path.stem}_core_parsed.txt")
+                parsed_file_path = self.pdf_path.with_name(
+                    f"{self.pdf_path.stem}_core_parsed.txt"
+                )
 
             # Write the extracted text to the parsed file
             with open(parsed_file_path, "w", encoding="utf-8") as f:
                 f.write(text)
-
-            return parsed_file_path
         except FileNotFoundError as e:
             # Raise an error if the PDF file is not found
             raise e
