@@ -1,9 +1,16 @@
+"""
+CLI for PDFPlumberWrapper
+
+This module provides a command-line interface to parse PDF content and write it to a text file.
+"""
+
 import argparse
 from pdf_parser.core import PDFParser
 
+
 def main():
     """
-    Command-line interface to parse PDF content and write it to a text file
+    Command-line interface to parse PDF content and write it to a text file.
     """
     # Create argument parser
     parser = argparse.ArgumentParser(description="Parse PDF content to text file.")
@@ -23,7 +30,11 @@ def main():
     args = parser.parse_args()
 
     # Create PDFParser instance
-    pdf_parser = PDFParser(args.pdf_path)
+    try:
+        pdf_parser = PDFParser(args.pdf_path)
+    except ValueError as e:
+        print(f"Error: {e}")
+        return
 
     # If parsed_file_path is not provided, use the default parsed file path
     if not args.parsed_file_path:
@@ -31,6 +42,7 @@ def main():
         pdf_parser.parse_to_file(default_parsed_file_path)
     else:
         pdf_parser.parse_to_file(args.parsed_file_path)
+
 
 if __name__ == "__main__":
     # If the script is executed directly, run the main function
